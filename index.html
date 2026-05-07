@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Reporte de Gastos — Mockup propuesto · Uvicuo</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background: #e9ecef;
+    color: #2a2a2a;
+    line-height: 1.4;
+    padding: 24px 16px;
+    font-size: 13px;
+  }
+
+  .doc-header {
+    max-width: 1280px;
+    margin: 0 auto 20px;
+    padding: 14px 20px;
+    background: #fff;
+    border-radius: 4px;
+    border: 1px solid #d1d5da;
+    font-size: 12px;
+    color: #586069;
+  }
+  .doc-header strong { color: #1a1d20; }
+
+  .layout {
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 20px;
+    max-width: 1280px;
+    margin: 0 auto;
+    align-items: start;
+  }
+
+  /* === REPORTE (estilo PDF actual de Uvicuo) === */
+  .pdf-page {
+    background: #fff;
+    border: 1px solid #d1d5da;
+    border-radius: 2px;
+    padding: 56px 64px 40px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    position: relative;
+  }
+
+  .pin {
+    position: absolute;
+    width: 26px;
+    height: 26px;
+    background: #00b341;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 12px;
+    z-index: 5;
+    border: 2px solid #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  }
+  .pin.new { background: #d97706; }
+
+  .new-badge {
+    display: inline-block;
+    background: #fef3c7;
+    color: #92400e;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 1px 6px;
+    border-radius: 2px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    vertical-align: middle;
+    margin-left: 4px;
+  }
+
+  /* ====== Sección 1: Logo + título ====== */
+  .brand-row {
+    text-align: center;
+    margin-bottom: 28px;
+    position: relative;
+  }
+  .uvicuo-logo {
+    color: #00b341;
+    font-weight: 700;
+    font-size: 40px;
+    letter-spacing: -1px;
+    line-height: 1;
+    font-style: italic;
+  }
+  .uvicuo-logo::before {
+    content: "";
+    display: inline-block;
+    width: 38px;
+    height: 38px;
+    background: #00b341;
+    border-radius: 50%;
+    vertical-align: middle;
+    margin-right: 6px;
+    position: relative;
+    top: -2px;
+  }
+  .report-title {
+    color: #00b341;
+    font-size: 28px;
+    font-weight: 700;
+    margin-top: 14px;
+    letter-spacing: 1px;
+  }
+
+  /* ====== Sección 2: Tabla de header info ====== */
+  .header-info {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 28px;
+    border: 1px solid #d1d5da;
+    position: relative;
+  }
+  .header-info td {
+    padding: 11px 16px;
+    border: 1px solid #d1d5da;
+    font-size: 12px;
+  }
+  .header-info td.label {
+    background: #f6f8fa;
+    width: 18%;
+    font-weight: 600;
+    color: #1a1d20;
+    text-align: right;
+  }
+  .header-info td.value { width: 32%; color: #2a2a2a; }
+  .header-info tr.new-row td.label,
+  .header-info tr.new-row td.value {
+    background: #fffbeb;
+  }
+  .header-info tr.total-row td.label {
+    background: #e6f7ec;
+    color: #006b27;
+  }
+  .header-info tr.total-row td.value {
+    background: #f1faf4;
+    font-weight: 700;
+    color: #006b27;
+    font-size: 14px;
+  }
+
+  h2.section {
+    color: #00b341;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin: 28px 0 14px;
+    border-bottom: 2px solid #00b341;
+    padding-bottom: 6px;
+    position: relative;
+  }
+
+  /* ====== Sección 3: Tabla detalle ====== */
+  .detail-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 10.5px;
+    margin-bottom: 18px;
+  }
+  .detail-table th {
+    background: #00b341;
+    color: #fff;
+    padding: 9px 7px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    border: 1px solid #00a83b;
+  }
+  .detail-table th.new-col {
+    background: #d97706;
+    border-color: #b8650a;
+  }
+  .detail-table td {
+    padding: 7px;
+    border: 1px solid #e1e4e8;
+    color: #2a2a2a;
+  }
+  .detail-table td.new-col {
+    background: #fffbeb;
+  }
+  .detail-table td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .detail-table td.uid { font-family: 'Courier New', monospace; font-size: 9.5px; color: #4a4a4a; letter-spacing: -0.3px; }
+  .detail-table td.dim { color: #999; }
+  .detail-table tr:nth-child(even) td { background: #f9fafb; }
+  .detail-table tr:nth-child(even) td.new-col { background: #fff7e1; }
+
+  /* ====== Sección 4: Resumen (varias tablas) ====== */
+  .resumen-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11px;
+    margin-bottom: 14px;
+    border: 1px solid #d1d5da;
+  }
+  .resumen-table caption {
+    text-align: left;
+    padding: 8px 12px;
+    background: #f6f8fa;
+    font-weight: 600;
+    color: #1a1d20;
+    font-size: 11px;
+    border: 1px solid #d1d5da;
+    border-bottom: none;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .resumen-table caption.new-caption {
+    background: #fef3c7;
+    color: #92400e;
+  }
+  .resumen-table th {
+    background: #f1f3f5;
+    padding: 8px 12px;
+    text-align: left;
+    font-weight: 600;
+    color: #1a1d20;
+    border: 1px solid #d1d5da;
+    font-size: 10.5px;
+  }
+  .resumen-table td {
+    padding: 7px 12px;
+    border: 1px solid #e1e4e8;
+  }
+  .resumen-table td.num, .resumen-table th.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .resumen-table tr.total-r td {
+    background: #00b341;
+    color: #fff;
+    font-weight: 700;
+  }
+
+  /* ====== Pie ====== */
+  .pdf-footer {
+    margin-top: 36px;
+    padding-top: 14px;
+    border-top: 1px solid #d1d5da;
+    text-align: center;
+    font-size: 10px;
+    color: #6a737d;
+    line-height: 1.7;
+    position: relative;
+  }
+  .pdf-footer strong { color: #2a2a2a; }
+
+  /* ====== Sidebar de anotaciones ====== */
+  aside { position: sticky; top: 16px; }
+
+  .annotations {
+    background: #fff;
+    border: 1px solid #d1d5da;
+    border-radius: 4px;
+    padding: 18px;
+  }
+  .annotations h2 {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #586069;
+    margin-bottom: 4px;
+    font-weight: 700;
+  }
+  .annotations p.intro {
+    font-size: 12px;
+    color: #586069;
+    margin-bottom: 16px;
+    line-height: 1.5;
+  }
+  .anno {
+    display: grid;
+    grid-template-columns: 26px 1fr;
+    gap: 10px;
+    padding: 12px 0;
+    border-top: 1px solid #e1e4e8;
+  }
+  .anno-num {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: #00b341;
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700;
+    font-size: 11px;
+    flex-shrink: 0;
+  }
+  .anno-num.new { background: #d97706; }
+  .anno h3 {
+    font-size: 12px;
+    font-weight: 700;
+    color: #1a1d20;
+    margin-bottom: 3px;
+  }
+  .anno p {
+    font-size: 11.5px;
+    color: #4a4a4a;
+    line-height: 1.5;
+  }
+  .anno .why {
+    margin-top: 4px;
+    padding: 6px 8px;
+    background: #f6f8fa;
+    border-left: 2px solid #00b341;
+    font-size: 11px;
+    color: #1a1d20;
+  }
+  .anno-num.new ~ .anno-content .why { border-left-color: #d97706; }
+
+  .legend {
+    background: #fffbeb;
+    border: 1px solid #fde68a;
+    border-radius: 4px;
+    padding: 12px 14px;
+    margin-top: 14px;
+    font-size: 11px;
+    color: #92400e;
+    line-height: 1.5;
+  }
+  .legend strong { color: #78350f; }
+
+  @media (max-width: 1100px) {
+    .layout { grid-template-columns: 1fr; }
+    aside { position: static; }
+  }
+</style>
+</head>
+<body>
+
+<div class="doc-header">
+  <strong>Reporte de Gastos · Mockup propuesto</strong> · sesión 2026-05-07 · para revisión de Iker, Chema y equipo de producto. <span style="color:#d97706; font-weight:600;">Naranja = elemento nuevo / cambio propuesto.</span>
+</div>
+
+<div class="layout">
+
+  <main>
+    <div class="pdf-page">
+
+      <!-- ====== HEADER VISUAL: logo + título ====== -->
+      <div class="brand-row">
+        <span class="pin">1</span>
+        <div class="uvicuo-logo">uvícuo</div>
+        <div class="report-title">REPORTE DE GASTOS</div>
+      </div>
+
+      <!-- ====== TABLA HEADER INFO ====== -->
+      <table class="header-info">
+        <tr>
+          <td class="label">Estatus:</td><td class="value">Pendientes</td>
+          <td class="label">Fecha de emisión:</td><td class="value">07/05/2026</td>
+        </tr>
+        <tr>
+          <td class="label">Categorías:</td><td class="value">Combustible, Peajes y Estacionamiento</td>
+          <td class="label">Total de gastos:</td><td class="value">76</td>
+        </tr>
+        <tr>
+          <td class="label">Método de pago:</td><td class="value">Tarjeta</td>
+          <td class="label">Periodo:</td><td class="value">11/02/2026 — 07/05/2026</td>
+        </tr>
+        <tr class="new-row">
+          <td class="label">Responsable filtrado: <span class="new-badge">Nuevo</span></td>
+          <td class="value">Mis planes (Javier H.)</td>
+          <td class="label">Generado por: <span class="new-badge">Nuevo</span></td>
+          <td class="value">Javier Hernández</td>
+        </tr>
+        <tr class="total-row">
+          <td class="label">Total gastado:</td>
+          <td class="value" colspan="3">$38,221.80 MXN</td>
+        </tr>
+      </table>
+
+      <!-- ====== RESUMEN (movido arriba) ====== -->
+      <h2 class="section">
+        <span class="pin" style="left:-46px; top:6px;">2</span>
+        Resumen
+      </h2>
+
+      <table class="resumen-table">
+        <caption>Por categoría</caption>
+        <thead>
+          <tr><th>Categoría</th><th class="num">Cantidad</th><th class="num">Total</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Peajes y Estacionamiento</td><td class="num">44</td><td class="num">$1,932.94</td></tr>
+          <tr><td>Combustible</td><td class="num">32</td><td class="num">$36,288.86</td></tr>
+          <tr class="total-r"><td>TOTAL</td><td class="num">76</td><td class="num">$38,221.80 MXN</td></tr>
+        </tbody>
+      </table>
+
+      <table class="resumen-table">
+        <caption class="new-caption">Por estatus de facturación <span class="new-badge">Nuevo</span></caption>
+        <thead>
+          <tr><th>Estatus</th><th class="num">Cantidad</th><th class="num">Total</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Con factura</td><td class="num">12</td><td class="num">$8,432.50</td></tr>
+          <tr><td>Sin factura</td><td class="num">64</td><td class="num">$29,789.30</td></tr>
+          <tr class="total-r"><td>TOTAL</td><td class="num">76</td><td class="num">$38,221.80 MXN</td></tr>
+        </tbody>
+      </table>
+
+      <table class="resumen-table">
+        <caption class="new-caption">Por estatus de viaje <span class="new-badge">Nuevo</span></caption>
+        <thead>
+          <tr><th>Estatus</th><th class="num">Cantidad</th><th class="num">Total</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Activo</td><td class="num">30</td><td class="num">$15,221.80</td></tr>
+          <tr><td>En cierre</td><td class="num">16</td><td class="num">$10,000.00</td></tr>
+          <tr><td>Finalizado</td><td class="num">30</td><td class="num">$13,000.00</td></tr>
+          <tr class="total-r"><td>TOTAL</td><td class="num">76</td><td class="num">$38,221.80 MXN</td></tr>
+        </tbody>
+      </table>
+
+      <table class="resumen-table">
+        <caption class="new-caption">Por responsable del plan <span class="new-badge">Nuevo</span></caption>
+        <thead>
+          <tr><th>Responsable</th><th class="num">Cantidad</th><th class="num">Total</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Javier Hernández (admin)</td><td class="num">25</td><td class="num">$20,221.80</td></tr>
+          <tr><td>Coordinador A (HER, MOC)</td><td class="num">30</td><td class="num">$13,000.00</td></tr>
+          <tr><td>Christopher (auditor)</td><td class="num">21</td><td class="num">$5,000.00</td></tr>
+          <tr class="total-r"><td>TOTAL</td><td class="num">76</td><td class="num">$38,221.80 MXN</td></tr>
+        </tbody>
+      </table>
+
+      <!-- ====== DETALLE DE GASTOS (ahora abajo del resumen) ====== -->
+      <h2 class="section">
+        <span class="pin" style="left:-46px; top:6px;">3</span>
+        Detalle de gastos
+      </h2>
+      <table class="detail-table">
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Categoría</th>
+            <th>Empleado</th>
+            <th>ID Viaje</th>
+            <th class="num">Monto</th>
+            <th>Ticket</th>
+            <th>Factura</th>
+            <th>Aprobado Por</th>
+            <th class="new-col">UID Factura SAT</th>
+            <th class="new-col">Estatus viaje</th>
+            <th class="new-col">Responsable</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>07/05/26 08:37</td><td>Combustible</td><td>Rocío Cruz</td><td class="dim">—</td>
+            <td class="num">$817.30</td><td>No</td><td>No</td><td class="dim">—</td>
+            <td class="uid new-col dim">—</td>
+            <td class="new-col">Activo</td>
+            <td class="new-col">Javier H.</td>
+          </tr>
+          <tr>
+            <td>05/05/26 21:12</td><td>Combustible</td><td>Raul G. Estrada</td><td>0198</td>
+            <td class="num">$1,322.11</td><td>Sí</td><td>Sí</td><td>Christopher</td>
+            <td class="uid new-col">A1B2C3D4-E5F6-7890-ABCD-1234567890EF</td>
+            <td class="new-col">Finalizado</td>
+            <td class="new-col">Javier H.</td>
+          </tr>
+          <tr>
+            <td>05/05/26 08:59</td><td>Combustible</td><td>Raul G. Estrada</td><td class="dim">—</td>
+            <td class="num">$1,596.25</td><td>Sí</td><td>No</td><td class="dim">—</td>
+            <td class="uid new-col dim">—</td>
+            <td class="new-col">En cierre</td>
+            <td class="new-col">Coord. A</td>
+          </tr>
+          <tr>
+            <td>05/05/26 05:35</td><td>Peajes y Estac.</td><td>Diego Galico</td><td class="dim">—</td>
+            <td class="num">$116.00</td><td>No</td><td>No</td><td class="dim">—</td>
+            <td class="uid new-col dim">—</td>
+            <td class="new-col">Activo</td>
+            <td class="new-col">Javier H.</td>
+          </tr>
+          <tr>
+            <td>04/05/26 12:23</td><td>Combustible</td><td>Raul G. Estrada</td><td class="dim">—</td>
+            <td class="num">$1,729.50</td><td>Sí</td><td>No</td><td class="dim">—</td>
+            <td class="uid new-col dim">—</td>
+            <td class="new-col">En cierre</td>
+            <td class="new-col">Coord. A</td>
+          </tr>
+          <tr>
+            <td>23/02/26 23:52</td><td>Combustible</td><td>Santiago Merino</td><td class="dim">—</td>
+            <td class="num">$700.00</td><td>Sí</td><td>Sí</td><td>Christopher</td>
+            <td class="uid new-col">F9E8D7C6-B5A4-3210-FEDC-BA0987654321</td>
+            <td class="new-col">Finalizado</td>
+            <td class="new-col">Christopher</td>
+          </tr>
+          <tr>
+            <td colspan="11" style="text-align:center; padding:14px; color:#8b949e; font-style:italic;">
+              ... 70 filas adicionales (76 totales)
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- ====== PIE ====== -->
+      <div class="pdf-footer">
+        <span class="pin" style="left:-46px; top:18px;">4</span>
+        Este documento es generado automáticamente por el sistema Uvicuo.<br>
+        Para cualquier aclaración o consulta, favor de contactar al equipo de finanzas.<br>
+        <strong>Documento confidencial</strong> · Solo para uso interno y auditoría.
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ====== SIDEBAR ANOTACIONES ====== -->
+  <aside>
+    <div class="annotations">
+      <h2>Cambios propuestos</h2>
+      <p class="intro">Conserva el formato actual del reporte. Solo se agregan los campos y secciones explicados a la derecha.</p>
+
+      <div class="anno">
+        <div class="anno-num">1</div>
+        <div class="anno-content">
+          <h3>Header — 2 filas nuevas</h3>
+          <p>Agregamos <strong>"Responsable filtrado"</strong> y <strong>"Generado por"</strong> al header existente.</p>
+          <div class="why"><strong>Por qué:</strong> hoy un admin como Javier descarga el reporte y entran gastos de planes que no son suyos. Saber quién filtró qué evita confusión y ensucia la conciliación.</div>
+        </div>
+      </div>
+
+      <div class="anno">
+        <div class="anno-num new">2</div>
+        <div class="anno-content">
+          <h3>Resumen — movido arriba + 3 tablas nuevas</h3>
+          <p>El resumen <strong>se mueve antes del detalle</strong>. Hoy hay 1 tabla (por categoría). Agregamos 3 más al mismo estilo: <strong>por facturación</strong>, <strong>por estatus de viaje</strong>, <strong>por responsable</strong>.</p>
+          <div class="why"><strong>Por qué arriba:</strong> pirámide invertida — agregado primero, detalle después. La mayoría de audiencias lee el resumen y se va sin abrir el detalle.<br><br><strong>Por qué 3 tablas más:</strong> cada audiencia tiene una pregunta distinta. Christopher → cuánto sin facturar. Yolanda → cuánto reembolsar. Iker/Chema → quién lleva qué.</div>
+        </div>
+      </div>
+
+      <div class="anno">
+        <div class="anno-num new">3</div>
+        <div class="anno-content">
+          <h3>Detalle — 3 columnas nuevas</h3>
+          <p>Agregamos <strong>UID Factura SAT</strong>, <strong>Estatus viaje</strong> y <strong>Responsable</strong> al final de la tabla.</p>
+          <div class="why"><strong>Por qué:</strong> Christopher (auditor) necesita el UID para cruzar con SAT. Yolanda necesita el estatus de viaje para saber cuáles puede reembolsar. Responsable cierra el ciclo del filtro del header.</div>
+        </div>
+      </div>
+
+      <div class="anno">
+        <div class="anno-num">4</div>
+        <div class="anno-content">
+          <h3>Pie — sin cambios</h3>
+          <p>Igual al actual.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="legend">
+      <strong>Diseño preservado:</strong> mismo logo, mismas tablas, mismos colores que el reporte actual. Solo se agrega contenido — la familiaridad del usuario se mantiene.
+      <br><br>
+      <strong>Naranja = nuevo.</strong> Verde = ya existe.
+    </div>
+  </aside>
+
+</div>
+
+<!-- ========================================== -->
+<!-- ============== BRIEF ===================== -->
+<!-- ========================================== -->
+
+<section class="brief">
+
+  <div class="brief-header">
+    <div class="brief-eyebrow">Brief</div>
+    <h1>Por qué cambiamos el reporte de gastos</h1>
+    <p>Este brief acompaña el mockup de arriba. Cruza cada cambio con el JTBD que resuelve y con los requirements para implementación. Sirve para que dev (Chema, Johnny) entienda qué construir y para que PE (Tadeo, Christian, Yolanda, Christopher) valide que el cambio resuelve su problema real.</p>
+  </div>
+
+  <!-- ====== Contexto ====== -->
+  <div class="brief-block">
+    <h2>Contexto</h2>
+    <p>El reporte de gastos PDF de Uvicuo lo consumen <strong>6 audiencias distintas</strong>, cada una con un job particular. Hoy el reporte está optimizado para una sola audiencia (operativa general) y la información que necesitan las otras 5 está incompleta o requiere cruce manual con otros sistemas. Este rediseño <strong>mantiene el formato actual</strong> y solo agrega los campos y secciones que cada audiencia requiere para resolver su job sin trabajo manual adicional.</p>
+    <p style="margin-top:10px;">Las decisiones se tomaron en sesión de product thinking 2026-05-07 entre Iker y Iker-AI, sobre la base de los discoveries del 2026-05-06 con Yolanda, Sarai, Néstor, Javier, Antonio, Christopher.</p>
+  </div>
+
+  <!-- ====== Audiencias y JTBDs ====== -->
+  <div class="brief-block">
+    <h2>Las 6 audiencias del reporte</h2>
+    <p>Cada audiencia abre el reporte buscando contestar una pregunta distinta:</p>
+    <table class="audience-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Audiencia</th>
+          <th>Ejemplo PE</th>
+          <th>JTBD principal</th>
+          <th>Frecuencia</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="aud-pill aud-1">A1</span></td>
+          <td>Coordinador de gastos</td>
+          <td>Sarai (caja, 4 sucursales)</td>
+          <td>"Conciliar mis pendientes contra mi físico/Excel"</td>
+          <td>Diaria</td>
+        </tr>
+        <tr>
+          <td><span class="aud-pill aud-2">A2</span></td>
+          <td>Administrador / Validador</td>
+          <td>Javier</td>
+          <td>"Validar mis pendientes sin que se me crucen gastos ajenos"</td>
+          <td>Diaria–semanal</td>
+        </tr>
+        <tr>
+          <td><span class="aud-pill aud-3">A3</span></td>
+          <td>Jefe de área / Responsable financiero</td>
+          <td>Yolanda</td>
+          <td>"Saber cuánto reembolsar de caja para reponer flujo"</td>
+          <td>Semanal–mensual</td>
+        </tr>
+        <tr>
+          <td><span class="aud-pill aud-4">A4</span></td>
+          <td>Auditor interno (sponsor real)</td>
+          <td>Christopher</td>
+          <td>"Demostrar trazabilidad fiscal SAT a auditoría externa"</td>
+          <td>Mensual–trimestral</td>
+        </tr>
+        <tr>
+          <td><span class="aud-pill aud-5">A5</span></td>
+          <td>Auditoría externa</td>
+          <td>Empresa externa</td>
+          <td>"Verificar que la deducibilidad declarada se sostiene"</td>
+          <td>Trimestral–anual</td>
+        </tr>
+        <tr>
+          <td><span class="aud-pill aud-6">A6</span></td>
+          <td>Contabilidad / Post-validación</td>
+          <td>Equipo contable PE</td>
+          <td>"Importar gastos validados al ERP para pólizas"</td>
+          <td>Diaria–mensual</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ====== Cambios → JTBD → Requirements ====== -->
+  <div class="brief-block">
+    <h2>Cambios propuestos · JTBD · requirements</h2>
+    <p>Cada cambio del mockup mapeado a la audiencia que sirve y al requirement técnico para implementarlo.</p>
+
+    <div class="change-card">
+      <div class="change-head">
+        <span class="change-num">1</span>
+        <h3>Header — agregar 2 filas: <em>Responsable filtrado</em> y <em>Generado por</em></h3>
+      </div>
+      <div class="change-body">
+        <div class="change-col">
+          <h4>JTBD que resuelve</h4>
+          <p>Javier (A2) descarga el reporte y le entran gastos de planes que no son suyos — su conciliación se ensucia. Saber <strong>quién filtró qué</strong> evita confusión y permite auditoría posterior del filtro aplicado.</p>
+          <p style="margin-top:6px;">Audiencias servidas: <span class="aud-pill aud-2">A2</span> <span class="aud-pill aud-4">A4</span></p>
+        </div>
+        <div class="change-col">
+          <h4>Requirements</h4>
+          <ul>
+            <li><strong>BE:</strong> el endpoint del reporte recibe un parámetro <code>responsable_id</code> (lista) y devuelve el filtro aplicado en el header del documento.</li>
+            <li><strong>FE:</strong> el header del PDF muestra "Responsable filtrado" y "Generado por" como filas adicionales en la tabla 2-cols ya existente.</li>
+            <li><strong>Default:</strong> "Mis planes (= usuario logueado)".</li>
+            <li><strong>Segregación:</strong> el usuario solo puede filtrar por responsables a los que tiene acceso (admin = todos; coordinador = los de sus ubicaciones).</li>
+          </ul>
+        </div>
+        <div class="change-col">
+          <h4>Cómo validamos</h4>
+          <ul>
+            <li>Javier descarga reporte con default "mis planes" → solo entran sus planes.</li>
+            <li>Coordinador A intenta filtrar por admin de Pacífico → BE rechaza (test cross-tenant).</li>
+            <li>Christopher cambia el filtro a otro responsable → reporte trae los de ese responsable.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="change-card">
+      <div class="change-head">
+        <span class="change-num new">2</span>
+        <h3>Resumen movido arriba + 3 tablas pivote nuevas</h3>
+      </div>
+      <div class="change-body">
+        <div class="change-col">
+          <h4>JTBD que resuelve</h4>
+          <p>Cada audiencia abre el reporte buscando una pregunta distinta. Hoy hay 1 sola tabla de resumen (categoría) que sirve a casi nadie. Las 3 tablas nuevas contestan:</p>
+          <ul>
+            <li><strong>Christopher (A4):</strong> "¿cuánto está pendiente de comprobación?" → Por estatus de facturación</li>
+            <li><strong>Yolanda (A3):</strong> "¿cuánto puedo reembolsar?" → Por estatus de viaje</li>
+            <li><strong>Iker / Chema:</strong> "¿quién lleva qué?" → Por responsable del plan</li>
+          </ul>
+          <p style="margin-top:6px;">Audiencias servidas: <span class="aud-pill aud-3">A3</span> <span class="aud-pill aud-4">A4</span> <span class="aud-pill aud-2">A2</span></p>
+          <p style="margin-top:6px;"><strong>Por qué arriba:</strong> pirámide invertida — la mayoría de audiencias (A3, A6) leen el resumen y se van sin abrir el detalle. El detalle vive abajo para A1, A2, A4, A5.</p>
+        </div>
+        <div class="change-col">
+          <h4>Requirements</h4>
+          <ul>
+            <li><strong>BE:</strong> endpoint devuelve los 4 agregados además del listado detallado, todos respetando los filtros aplicados.</li>
+            <li><strong>FE:</strong> sección "RESUMEN" se posiciona <strong>entre</strong> el header y el detalle. 4 tablas en formato vertical (mismo estilo que el resumen actual de "categoría").</li>
+            <li><strong>Cada tabla:</strong> columnas <code>dimensión / Cantidad / Total MXN</code> + fila TOTAL al final.</li>
+            <li><strong>Consistencia:</strong> los 4 totales deben coincidir entre sí (test).</li>
+          </ul>
+        </div>
+        <div class="change-col">
+          <h4>Cómo validamos</h4>
+          <ul>
+            <li>Christopher abre el reporte → ve "Sin factura: $29,789.30" en 5 segundos.</li>
+            <li>Yolanda abre el reporte → ve "Finalizado: $13,000.00" sin scroll a detalle.</li>
+            <li>Total general suma igual en las 4 tablas (consistencia interna).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="change-card">
+      <div class="change-head">
+        <span class="change-num new">3</span>
+        <h3>Detalle — agregar 3 columnas: <em>UID Factura SAT</em>, <em>Estatus viaje</em>, <em>Responsable</em></h3>
+      </div>
+      <div class="change-body">
+        <div class="change-col">
+          <h4>JTBD que resuelve</h4>
+          <ul>
+            <li><strong>UID Factura SAT</strong> → Christopher (A4) liga cada gasto con su XML SAT para auditoría externa.</li>
+            <li><strong>Estatus viaje</strong> → Yolanda (A3) identifica qué gastos están listos para reembolso.</li>
+            <li><strong>Responsable</strong> → cierra el ciclo del filtro del header (transparencia: si filtré por X, en cada fila veo X).</li>
+          </ul>
+          <p style="margin-top:6px;">Audiencias servidas: <span class="aud-pill aud-2">A2</span> <span class="aud-pill aud-3">A3</span> <span class="aud-pill aud-4">A4</span> <span class="aud-pill aud-5">A5</span></p>
+        </div>
+        <div class="change-col">
+          <h4>Requirements</h4>
+          <ul>
+            <li><strong>BE persistencia (a confirmar Johnny):</strong>
+              <ul>
+                <li>UID factura SAT debe estar accesible en el modelo de gasto (probablemente vía join con tabla de facturas).</li>
+                <li>Estatus de viaje debe estar normalizado: <code>Planeado / Activo / En cierre / Finalizado</code>.</li>
+                <li>"Responsable" = usuario que <strong>activó</strong> el plan (no el que lo creó).</li>
+              </ul>
+            </li>
+            <li><strong>FE:</strong> 3 columnas nuevas al final de la tabla detalle (probable cambio a layout landscape por ancho).</li>
+            <li><strong>Edge cases:</strong> sin factura → <code>—</code>; XML cancelado → UID + tag "cancelado"; plan eliminado → tag "Plan eliminado".</li>
+          </ul>
+        </div>
+        <div class="change-col">
+          <h4>Cómo validamos</h4>
+          <ul>
+            <li>Christopher toma un UID del reporte → lo pega en SAT → coincide con el XML real (test manual).</li>
+            <li>Yolanda filtra el detalle por "Finalizado" en su lectura → coincide con el total de la tabla "Por estatus de viaje" del resumen.</li>
+            <li>Cada fila tiene "Responsable" = el responsable del plan padre.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ====== Decisiones tomadas (y descartadas) ====== -->
+  <div class="brief-block">
+    <h2>Decisiones tomadas (y descartadas)</h2>
+    <table class="decision-table">
+      <thead><tr><th>Decisión</th><th>Por qué</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>1 reporte con secciones, NO N reportes especializados</strong></td>
+          <td>Las audiencias miran el mismo dataset con agrupaciones distintas. N reportes especializados duplica lógica + riesgo de divergencia de números + mantenimiento. Mejor 1 reporte donde cada audiencia "va a su sección".</td>
+        </tr>
+        <tr>
+          <td><strong>Mantener el formato visual del PDF actual</strong></td>
+          <td>El usuario ya conoce el reporte. Cambiar a un look "tipo dashboard" con KPIs y cards rompe la familiaridad. El cambio es de <em>contenido</em>, no de <em>presentación</em>.</td>
+        </tr>
+        <tr>
+          <td><strong>NO agregar 5to breakdown "Por estatus del gasto" (Pendiente/Validado/Invalidado)</strong></td>
+          <td>Esa info ya está en el header (filtro tab origen). Una tabla pivote con 1 sola fila es ruido. Si en el futuro se permite reporte multi-tab, retomamos.</td>
+        </tr>
+        <tr>
+          <td><strong>NO agregar Hero panel con KPIs visuales</strong></td>
+          <td>Sería overengineering — el header actual con "Total gastado" + las 4 tablas de resumen cubren los KPIs sin romper el formato.</td>
+        </tr>
+        <tr>
+          <td><strong>Filtro de responsable va en modal "Generar reporte" (T-01), no en la vista</strong></td>
+          <td>La vista ya tiene 5 filtros (Empleado, Fecha, ID viaje, Método, Categorías). El filtro de responsable es contextual al momento de generar reporte. Decisión documentada en T-01.</td>
+        </tr>
+        <tr>
+          <td><strong>NO se permite descarga multi-tab (Pendiente + Validado + Invalidado en un mismo reporte)</strong></td>
+          <td>Aplicado JTBD lens, ninguna audiencia lo necesita en V1. Si llega retro real (Christopher u otro pidiéndolo), retomamos como T-06.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ====== Pendientes con dev ====== -->
+  <div class="brief-block">
+    <h2>Pendientes con dev al implementar</h2>
+    <ul class="pendientes-list">
+      <li><strong>Persistencia BE de campos nuevos</strong> (Johnny): confirmar si UID factura, estatus de viaje y "responsable que activó" se persisten hoy. Si no, agregar como pre-requisito.</li>
+      <li><strong>Layout PDF</strong>: con 3 columnas nuevas en el detalle puede requerir landscape o reducir ancho de otras columnas. Decisión de diseño cuando se implemente.</li>
+      <li><strong>Segregación de datos en filtro de responsable</strong>: enforce en BE, no solo UI. Tests cross-tenant.</li>
+      <li><strong>Consistencia entre las 4 tablas pivote y el detalle</strong>: el total general debe coincidir en las 5 secciones (test automatizado).</li>
+      <li><strong>Casos edge UID</strong>: cancelado / múltiple / sin factura — definir reglas de display.</li>
+    </ul>
+  </div>
+
+  <!-- ====== Cómo validamos con PE ====== -->
+  <div class="brief-block">
+    <h2>Cómo validamos con Paquetexpress</h2>
+    <ol class="validation-list">
+      <li><strong>Christopher</strong>: tomar 5 UIDs del reporte → cruzarlos con SAT → 100% deben coincidir. Sirve para sign-off de auditoría externa.</li>
+      <li><strong>Yolanda</strong>: usar el reporte para 1 ciclo de reembolso de caja real. Si la cifra "Finalizado" coincide con lo que efectivamente reembolsa, está validado.</li>
+      <li><strong>Javier</strong>: descargar reporte con default "mis planes" → confirmar que su conciliación ya no entra gastos ajenos.</li>
+      <li><strong>Sarai / coordinadores</strong>: usar el reporte en su rutina diaria → feedback en 2 semanas sobre legibilidad y completitud.</li>
+    </ol>
+  </div>
+
+  <!-- ====== Footer ====== -->
+  <div class="brief-footer">
+    <strong>Documento de trabajo · iniciativa Paquetexpress Cash Wrap-up</strong><br>
+    Sesión de product thinking: Iker · 2026-05-07<br>
+    Doc canónico: <code>research/product-thinking/reporte-gastos.md</code>
+  </div>
+
+</section>
+
+<style>
+  .brief {
+    max-width: 1280px;
+    margin: 40px auto 24px;
+    padding: 40px 48px;
+    background: #fff;
+    border-radius: 4px;
+    border: 1px solid #d1d5da;
+    color: #2a2a2a;
+  }
+  .brief-header {
+    border-bottom: 2px solid #00b341;
+    padding-bottom: 18px;
+    margin-bottom: 28px;
+  }
+  .brief-eyebrow {
+    color: #00b341;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+  }
+  .brief-header h1 {
+    font-size: 26px;
+    color: #1a1d20;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .brief-header p {
+    font-size: 14px;
+    color: #4a4a4a;
+    line-height: 1.6;
+    max-width: 90%;
+  }
+
+  .brief-block {
+    margin-bottom: 36px;
+  }
+  .brief-block > h2 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1a1d20;
+    margin-bottom: 8px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #e1e4e8;
+  }
+  .brief-block > p {
+    font-size: 13px;
+    color: #4a4a4a;
+    line-height: 1.6;
+    margin-bottom: 10px;
+  }
+
+  /* Tabla audiencias */
+  .audience-table, .decision-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    margin-top: 10px;
+  }
+  .audience-table th, .audience-table td,
+  .decision-table th, .decision-table td {
+    padding: 9px 12px;
+    border: 1px solid #e1e4e8;
+    text-align: left;
+    vertical-align: top;
+  }
+  .audience-table th, .decision-table th {
+    background: #f6f8fa;
+    font-weight: 600;
+    color: #1a1d20;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .audience-table tr:nth-child(even) td,
+  .decision-table tr:nth-child(even) td {
+    background: #fafbfc;
+  }
+
+  .aud-pill {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 10px;
+    font-weight: 700;
+    color: #fff;
+    margin-right: 2px;
+  }
+  .aud-1 { background: #00b341; }
+  .aud-2 { background: #2c994d; }
+  .aud-3 { background: #257d3f; }
+  .aud-4 { background: #1f6633; }
+  .aud-5 { background: #194f29; }
+  .aud-6 { background: #14391d; }
+
+  /* Cards de cambios */
+  .change-card {
+    border: 1px solid #d1d5da;
+    border-radius: 4px;
+    margin-bottom: 18px;
+    overflow: hidden;
+  }
+  .change-head {
+    background: #f6f8fa;
+    padding: 12px 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid #e1e4e8;
+  }
+  .change-num {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: #00b341;
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700;
+    font-size: 13px;
+    flex-shrink: 0;
+  }
+  .change-num.new { background: #d97706; }
+  .change-head h3 {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1a1d20;
+    margin: 0;
+  }
+  .change-head h3 em {
+    font-style: italic;
+    color: #00b341;
+    font-weight: 700;
+  }
+  .change-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+  }
+  .change-col {
+    padding: 16px 18px;
+    border-right: 1px solid #e1e4e8;
+  }
+  .change-col:last-child { border-right: none; }
+  .change-col h4 {
+    font-size: 11px;
+    text-transform: uppercase;
+    color: #6a737d;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    font-weight: 700;
+  }
+  .change-col p {
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: #2a2a2a;
+    margin-bottom: 4px;
+  }
+  .change-col ul {
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: #2a2a2a;
+    margin-left: 16px;
+    margin-top: 2px;
+  }
+  .change-col ul ul {
+    margin-top: 2px;
+    font-size: 11.5px;
+    color: #4a4a4a;
+  }
+  .change-col li { margin-bottom: 3px; }
+  .change-col code {
+    background: #f1f3f5;
+    padding: 1px 5px;
+    border-radius: 2px;
+    font-size: 11px;
+    color: #d97706;
+  }
+
+  /* Pendientes y validación */
+  .pendientes-list, .validation-list {
+    margin-left: 20px;
+    margin-top: 12px;
+  }
+  .pendientes-list li, .validation-list li {
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 8px;
+    color: #2a2a2a;
+  }
+  .pendientes-list strong, .validation-list strong { color: #1a1d20; }
+
+  .brief-footer {
+    margin-top: 30px;
+    padding-top: 18px;
+    border-top: 1px solid #e1e4e8;
+    text-align: center;
+    font-size: 11px;
+    color: #6a737d;
+    line-height: 1.6;
+  }
+  .brief-footer code {
+    background: #f1f3f5;
+    padding: 1px 5px;
+    border-radius: 2px;
+    font-size: 10px;
+  }
+
+  @media (max-width: 1100px) {
+    .brief { padding: 24px; }
+    .change-body { grid-template-columns: 1fr; }
+    .change-col { border-right: none; border-bottom: 1px solid #e1e4e8; }
+    .change-col:last-child { border-bottom: none; }
+  }
+</style>
+
+</body>
+</html>
