@@ -433,12 +433,76 @@
         </tbody>
       </table>
 
-      <!-- ====== DETALLE DE GASTOS (ahora abajo del resumen) ====== -->
+      <!-- ====== DETALLE DE GASTOS (ahora abajo del resumen, agrupado por estatus) ====== -->
       <h2 class="section">
-        <span class="pin" style="left:-46px; top:6px;">3</span>
-        Detalle de gastos
+        <span class="pin new" style="left:-46px; top:6px;">3</span>
+        Detalle de gastos <span class="new-badge">Orden agrupado nuevo</span>
       </h2>
+
+      <p style="margin-bottom:10px; padding:10px 14px; background:#fffbeb; border:1px solid #fde68a; border-radius:4px; font-size:11.5px; color:#78350f;">
+        <strong>Cambio de orden propuesto:</strong> el detalle se agrupa por estatus del viaje. Primero <strong>los gastos comprobables</strong> (Finalizado + En cierre), después los <strong>aún no comprobables</strong> (Activo + Planeado). Dentro de cada grupo, orden por fecha descendente.
+      </p>
+
+      <h3 style="font-size:12px; color:#00b341; font-weight:700; margin:14px 0 8px; text-transform:uppercase; letter-spacing:0.8px;">
+        Comprobables · Finalizado + En cierre · 46 gastos · $23,000.00
+      </h3>
       <table class="detail-table">
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Categoría</th>
+            <th>Empleado</th>
+            <th>ID Viaje</th>
+            <th class="num">Monto</th>
+            <th>Ticket</th>
+            <th>Factura</th>
+            <th>Aprobado Por</th>
+            <th class="new-col">UID Factura SAT</th>
+            <th class="new-col">Estatus viaje</th>
+            <th class="new-col">Responsable</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>05/05/26 21:12</td><td>Combustible</td><td>Raul G. Estrada</td><td>0198</td>
+            <td class="num">$1,322.11</td><td>Sí</td><td>Sí</td><td>Christopher</td>
+            <td class="uid new-col">A1B2C3D4-E5F6-7890-ABCD-1234567890EF</td>
+            <td class="new-col">Finalizado</td>
+            <td class="new-col">Javier H.</td>
+          </tr>
+          <tr>
+            <td>23/02/26 23:52</td><td>Combustible</td><td>Santiago Merino</td><td class="dim">—</td>
+            <td class="num">$700.00</td><td>Sí</td><td>Sí</td><td>Christopher</td>
+            <td class="uid new-col">F9E8D7C6-B5A4-3210-FEDC-BA0987654321</td>
+            <td class="new-col">Finalizado</td>
+            <td class="new-col">Christopher</td>
+          </tr>
+          <tr>
+            <td>05/05/26 08:59</td><td>Combustible</td><td>Raul G. Estrada</td><td class="dim">—</td>
+            <td class="num">$1,596.25</td><td>Sí</td><td>No</td><td class="dim">—</td>
+            <td class="uid new-col dim">—</td>
+            <td class="new-col">En cierre</td>
+            <td class="new-col">Coord. A</td>
+          </tr>
+          <tr>
+            <td>04/05/26 12:23</td><td>Combustible</td><td>Raul G. Estrada</td><td class="dim">—</td>
+            <td class="num">$1,729.50</td><td>Sí</td><td>No</td><td class="dim">—</td>
+            <td class="uid new-col dim">—</td>
+            <td class="new-col">En cierre</td>
+            <td class="new-col">Coord. A</td>
+          </tr>
+          <tr>
+            <td colspan="11" style="text-align:center; padding:10px; color:#8b949e; font-style:italic; font-size:10px;">
+              ... 42 filas adicionales (46 comprobables totales)
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 style="font-size:12px; color:#8b949e; font-weight:700; margin:18px 0 8px; text-transform:uppercase; letter-spacing:0.8px;">
+        Aún no comprobables · Activo + Planeado · 30 gastos · $15,221.80
+      </h3>
+      <table class="detail-table" style="opacity:0.85;">
         <thead>
           <tr>
             <th>Fecha</th>
@@ -463,20 +527,6 @@
             <td class="new-col">Javier H.</td>
           </tr>
           <tr>
-            <td>05/05/26 21:12</td><td>Combustible</td><td>Raul G. Estrada</td><td>0198</td>
-            <td class="num">$1,322.11</td><td>Sí</td><td>Sí</td><td>Christopher</td>
-            <td class="uid new-col">A1B2C3D4-E5F6-7890-ABCD-1234567890EF</td>
-            <td class="new-col">Finalizado</td>
-            <td class="new-col">Javier H.</td>
-          </tr>
-          <tr>
-            <td>05/05/26 08:59</td><td>Combustible</td><td>Raul G. Estrada</td><td class="dim">—</td>
-            <td class="num">$1,596.25</td><td>Sí</td><td>No</td><td class="dim">—</td>
-            <td class="uid new-col dim">—</td>
-            <td class="new-col">En cierre</td>
-            <td class="new-col">Coord. A</td>
-          </tr>
-          <tr>
             <td>05/05/26 05:35</td><td>Peajes y Estac.</td><td>Diego Galico</td><td class="dim">—</td>
             <td class="num">$116.00</td><td>No</td><td>No</td><td class="dim">—</td>
             <td class="uid new-col dim">—</td>
@@ -484,22 +534,8 @@
             <td class="new-col">Javier H.</td>
           </tr>
           <tr>
-            <td>04/05/26 12:23</td><td>Combustible</td><td>Raul G. Estrada</td><td class="dim">—</td>
-            <td class="num">$1,729.50</td><td>Sí</td><td>No</td><td class="dim">—</td>
-            <td class="uid new-col dim">—</td>
-            <td class="new-col">En cierre</td>
-            <td class="new-col">Coord. A</td>
-          </tr>
-          <tr>
-            <td>23/02/26 23:52</td><td>Combustible</td><td>Santiago Merino</td><td class="dim">—</td>
-            <td class="num">$700.00</td><td>Sí</td><td>Sí</td><td>Christopher</td>
-            <td class="uid new-col">F9E8D7C6-B5A4-3210-FEDC-BA0987654321</td>
-            <td class="new-col">Finalizado</td>
-            <td class="new-col">Christopher</td>
-          </tr>
-          <tr>
-            <td colspan="11" style="text-align:center; padding:14px; color:#8b949e; font-style:italic;">
-              ... 70 filas adicionales (76 totales)
+            <td colspan="11" style="text-align:center; padding:10px; color:#8b949e; font-style:italic; font-size:10px;">
+              ... 28 filas adicionales (30 no comprobables totales)
             </td>
           </tr>
         </tbody>
@@ -543,9 +579,9 @@
       <div class="anno">
         <div class="anno-num new">3</div>
         <div class="anno-content">
-          <h3>Detalle — 3 columnas nuevas</h3>
-          <p>Agregamos <strong>UID Factura SAT</strong>, <strong>Estatus viaje</strong> y <strong>Responsable</strong> al final de la tabla.</p>
-          <div class="why"><strong>Por qué:</strong> Christopher (auditor) necesita el UID para cruzar con SAT. Yolanda necesita el estatus de viaje para saber cuáles puede reembolsar. Responsable cierra el ciclo del filtro del header.</div>
+          <h3>Detalle — 3 columnas + agrupado por estatus</h3>
+          <p>3 columnas nuevas: <strong>UID Factura SAT</strong>, <strong>Estatus viaje</strong>, <strong>Responsable</strong>. Adicional, el detalle se <strong>agrupa por estatus del viaje</strong>: comprobables (Finalizado + En cierre) primero, no comprobables (Activo + Planeado) después.</p>
+          <div class="why"><strong>Por qué columnas:</strong> Christopher cruza UID con SAT. Yolanda usa estatus de viaje para saber qué reembolsa.<br><br><strong>Por qué el agrupado</strong> (feedback Christopher 07-may): cuando comprueba casetas, le entran activos mezclados. Agrupar deja contiguas las comprobables.</div>
         </div>
       </div>
 
