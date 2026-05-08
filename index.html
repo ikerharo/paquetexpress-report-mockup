@@ -440,7 +440,7 @@
       </h2>
 
       <p style="margin-bottom:10px; padding:10px 14px; background:#fffbeb; border:1px solid #fde68a; border-radius:4px; font-size:11.5px; color:#78350f;">
-        <strong>Cambio de orden propuesto:</strong> el detalle se agrupa por estatus del viaje. Primero <strong>los gastos comprobables</strong> (Finalizado + En cierre), después los <strong>aún no comprobables</strong> (Activo + Planeado). Dentro de cada grupo, orden por fecha descendente.
+        <strong>Cambio propuesto:</strong> el detalle se separa en <strong>2 sub-tablas en páginas distintas del PDF</strong>. Primero <strong>los gastos comprobables</strong> (Finalizado + En cierre), en página(s) propias. Después, <strong>los aún no comprobables</strong> (Activo + Planeado), en página(s) aparte. Yolanda imprime solo la sección de comprobables para soportar su póliza contable; Christopher mantiene el PDF completo para auditoría externa.
       </p>
 
       <h3 style="font-size:12px; color:#00b341; font-weight:700; margin:14px 0 8px; text-transform:uppercase; letter-spacing:0.8px;">
@@ -498,6 +498,10 @@
           </tr>
         </tbody>
       </table>
+
+      <div style="margin: 28px 0 18px; padding: 16px 20px; background: #f6f8fa; border-top: 2px dashed #00b341; border-bottom: 2px dashed #00b341; text-align: center; color: #586069; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px;">
+        ↓ Página siguiente del PDF (page-break) ↓
+      </div>
 
       <h3 style="font-size:12px; color:#8b949e; font-weight:700; margin:18px 0 8px; text-transform:uppercase; letter-spacing:0.8px;">
         Aún no comprobables · Activo + Planeado · 30 gastos · $15,221.80
@@ -581,7 +585,7 @@
         <div class="anno-content">
           <h3>Detalle — 3 columnas + agrupado por estatus</h3>
           <p>3 columnas nuevas: <strong>UID Factura SAT</strong>, <strong>Estatus viaje</strong>, <strong>Responsable</strong>. Adicional, el detalle se <strong>agrupa por estatus del viaje</strong>: comprobables (Finalizado + En cierre) primero, no comprobables (Activo + Planeado) después.</p>
-          <div class="why"><strong>Por qué columnas:</strong> Christopher cruza UID con SAT. Yolanda usa estatus de viaje para saber qué reembolsa.<br><br><strong>Por qué el agrupado</strong> (feedback Christopher 07-may): cuando comprueba casetas, le entran activos mezclados. Agrupar deja contiguas las comprobables.</div>
+          <div class="why"><strong>Por qué columnas:</strong> Christopher cruza UID con SAT. Yolanda usa estatus de viaje para saber qué reembolsa.<br><br><strong>Por qué la separación en páginas</strong> (feedback Christopher 07-may v2): Yolanda necesita adjuntar a su póliza contable SOLO las comprobables. Si están en páginas separadas del PDF, imprime esas y listo. Christopher mantiene el PDF completo para auditoría externa. Implementación: page-break en CSS (cambio mínimo).</div>
         </div>
       </div>
 
