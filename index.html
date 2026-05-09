@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Reporte de Gastos — Mockup propuesto v3 · Pivote a Spending Plans</title>
+<title>Reporte de Gastos — Mockup v4 · Spending Plans</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -10,7 +10,7 @@
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     background: #e9ecef;
     color: #2a2a2a;
-    line-height: 1.4;
+    line-height: 1.45;
     padding: 24px 16px;
     font-size: 13px;
   }
@@ -29,14 +29,14 @@
 
   .layout {
     display: grid;
-    grid-template-columns: 1fr 360px;
+    grid-template-columns: 1fr 340px;
     gap: 20px;
     max-width: 1280px;
     margin: 0 auto;
     align-items: start;
   }
 
-  /* === REPORTE (estilo PDF actual de Uvicuo) === */
+  /* === REPORTE === */
   .pdf-page {
     background: #fff;
     border: 1px solid #d1d5da;
@@ -48,8 +48,8 @@
 
   .pin {
     position: absolute;
-    width: 26px;
-    height: 26px;
+    width: 24px;
+    height: 24px;
     background: #00b341;
     color: #fff;
     border-radius: 50%;
@@ -57,37 +57,22 @@
     align-items: center;
     justify-content: center;
     font-weight: 700;
-    font-size: 12px;
+    font-size: 11px;
     z-index: 5;
     border: 2px solid #fff;
     box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   }
-  .pin.new { background: #d97706; }
 
-  .new-badge {
-    display: inline-block;
-    background: #fef3c7;
-    color: #92400e;
-    font-size: 9px;
-    font-weight: 700;
-    padding: 1px 6px;
-    border-radius: 2px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    vertical-align: middle;
-    margin-left: 4px;
-  }
-
-  /* ====== Sección 1: Logo + título ====== */
+  /* ====== Brand ====== */
   .brand-row {
     text-align: center;
-    margin-bottom: 28px;
+    margin-bottom: 24px;
     position: relative;
   }
   .uvicuo-logo {
     color: #00b341;
     font-weight: 700;
-    font-size: 40px;
+    font-size: 36px;
     letter-spacing: -1px;
     line-height: 1;
     font-style: italic;
@@ -95,8 +80,8 @@
   .uvicuo-logo::before {
     content: "";
     display: inline-block;
-    width: 38px;
-    height: 38px;
+    width: 34px;
+    height: 34px;
     background: #00b341;
     border-radius: 50%;
     vertical-align: middle;
@@ -106,24 +91,24 @@
   }
   .report-title {
     color: #00b341;
-    font-size: 28px;
+    font-size: 24px;
     font-weight: 700;
-    margin-top: 14px;
+    margin-top: 12px;
     letter-spacing: 1px;
   }
 
-  /* ====== Sección 2: Tabla de header info ====== */
+  /* ====== Header info ====== */
   .header-info {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 28px;
+    margin-bottom: 22px;
     border: 1px solid #d1d5da;
     position: relative;
   }
   .header-info td {
-    padding: 11px 16px;
+    padding: 9px 14px;
     border: 1px solid #d1d5da;
-    font-size: 12px;
+    font-size: 11.5px;
   }
   .header-info td.label {
     background: #f6f8fa;
@@ -133,39 +118,64 @@
     text-align: right;
   }
   .header-info td.value { width: 32%; color: #2a2a2a; }
-  .header-info tr.new-row td.label,
-  .header-info tr.new-row td.value {
-    background: #fffbeb;
+
+  /* ====== Total General (hero) ====== */
+  .hero-total {
+    background: linear-gradient(135deg, #00b341 0%, #00802a 100%);
+    color: #fff;
+    border-radius: 6px;
+    padding: 24px 28px;
+    margin-bottom: 26px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    box-shadow: 0 2px 6px rgba(0, 179, 65, 0.2);
   }
-  .header-info tr.total-row td.label {
-    background: #e6f7ec;
-    color: #006b27;
+  .hero-total .label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    opacity: 0.85;
+    margin-bottom: 4px;
+    font-weight: 600;
   }
-  .header-info tr.total-row td.value {
-    background: #f1faf4;
+  .hero-total .amount {
+    font-size: 38px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .hero-total .breakdown {
+    text-align: right;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .hero-total .breakdown strong {
+    font-size: 18px;
     font-weight: 700;
-    color: #006b27;
-    font-size: 14px;
   }
 
+  /* ====== Sección title ====== */
   h2.section {
     color: #00b341;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1.5px;
-    margin: 28px 0 14px;
+    margin: 24px 0 12px;
     border-bottom: 2px solid #00b341;
-    padding-bottom: 6px;
+    padding-bottom: 5px;
     position: relative;
   }
 
-  /* ====== Resumen agregado (multi-cortes) ====== */
+  /* ====== Resumen agregado (2 tablas) ====== */
   .resumen-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 14px;
-    margin-bottom: 18px;
+    margin-bottom: 26px;
   }
   .resumen-table {
     width: 100%;
@@ -179,106 +189,106 @@
     background: #f6f8fa;
     font-weight: 600;
     color: #1a1d20;
-    font-size: 11px;
+    font-size: 10.5px;
     border: 1px solid #d1d5da;
     border-bottom: none;
     text-transform: uppercase;
     letter-spacing: 0.5px;
   }
-  .resumen-table caption.new-caption {
-    background: #fef3c7;
-    color: #92400e;
+  .resumen-table caption .audience-tag {
+    float: right;
+    font-size: 9px;
+    color: #00b341;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
   }
   .resumen-table th {
-    background: #f1f3f5;
-    padding: 7px 12px;
+    background: #fafbfc;
+    padding: 6px 12px;
     text-align: left;
     font-weight: 600;
-    color: #1a1d20;
+    color: #586069;
     border: 1px solid #d1d5da;
-    font-size: 10.5px;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
   }
   .resumen-table td {
-    padding: 6px 12px;
+    padding: 7px 12px;
     border: 1px solid #e1e4e8;
   }
   .resumen-table td.num, .resumen-table th.num { text-align: right; font-variant-numeric: tabular-nums; }
   .resumen-table tr.total-r td {
-    background: #00b341;
-    color: #fff;
+    background: #f1f8f4;
+    color: #006b27;
     font-weight: 700;
   }
+  .resumen-table .row-highlight td {
+    background: #d4f0db;
+    font-weight: 600;
+  }
 
-  /* ====== Bloque por plan (nueva estructura) ====== */
+  /* ====== Bloque por plan ====== */
   .plan-block {
     border: 1px solid #d1d5da;
-    border-radius: 4px;
-    margin-bottom: 16px;
+    border-radius: 6px;
+    margin-bottom: 14px;
     background: #fff;
     overflow: hidden;
   }
   .plan-header {
-    background: linear-gradient(90deg, #f1f8f4 0%, #ffffff 100%);
-    padding: 12px 16px;
-    border-bottom: 1px solid #d1d5da;
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
-    gap: 8px;
-    align-items: center;
+    padding: 14px 18px;
+    border-bottom: 1px solid #e1e4e8;
+    background: #fafbfc;
   }
-  .plan-header .plan-id {
-    font-weight: 700;
+  .plan-header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 6px;
+  }
+  .plan-id-operator {
+    font-size: 14px;
+    color: #1a1d20;
+  }
+  .plan-id-operator .plan-id {
     color: #00b341;
-    font-size: 13px;
-    letter-spacing: 0.5px;
+    font-weight: 700;
+    margin-right: 8px;
   }
-  .plan-header .plan-meta {
+  .plan-id-operator .operator {
+    font-weight: 600;
+  }
+  .plan-total {
+    font-size: 18px;
+    font-weight: 800;
+    color: #006b27;
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+  }
+  .plan-meta {
     font-size: 11px;
     color: #586069;
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    flex-wrap: wrap;
   }
-  .plan-header .plan-meta strong { color: #1a1d20; }
-  .plan-header .plan-status {
-    text-align: right;
-    font-size: 11px;
-  }
-  .plan-header .plan-status .badge {
+  .plan-meta .sep { color: #d1d5da; }
+  .plan-meta strong { color: #1a1d20; }
+  .badge {
     display: inline-block;
-    padding: 2px 10px;
-    border-radius: 12px;
+    padding: 2px 9px;
+    border-radius: 11px;
     font-size: 10px;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.4px;
   }
   .badge-finalizado { background: #d4f0db; color: #00802a; }
   .badge-cierre { background: #fff8d4; color: #b3850c; }
   .badge-activo { background: #fff4e1; color: #b25d00; }
-  .plan-header .plan-total {
-    text-align: right;
-    font-weight: 700;
-    color: #006b27;
-    font-size: 13px;
-    font-variant-numeric: tabular-nums;
-  }
-  .plan-header .plan-total .label-total {
-    display: block;
-    font-size: 9px;
-    color: #6a737d;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    font-weight: 600;
-    margin-bottom: 2px;
-  }
-  .plan-second-row {
-    background: #f9fafb;
-    padding: 6px 16px;
-    border-bottom: 1px solid #e1e4e8;
-    font-size: 10.5px;
-    color: #586069;
-    display: flex;
-    gap: 18px;
-  }
-  .plan-second-row strong { color: #1a1d20; }
 
   table.expense-table {
     width: 100%;
@@ -286,9 +296,9 @@
     font-size: 10.5px;
   }
   table.expense-table th {
-    background: #f6f8fa;
+    background: #fff;
     color: #586069;
-    padding: 6px 8px;
+    padding: 6px 14px;
     text-align: left;
     font-weight: 600;
     font-size: 9.5px;
@@ -297,113 +307,104 @@
     border-bottom: 1px solid #e1e4e8;
   }
   table.expense-table td {
-    padding: 6px 8px;
+    padding: 7px 14px;
     border-bottom: 1px solid #f1f3f5;
     color: #2a2a2a;
   }
   table.expense-table td.num { text-align: right; font-variant-numeric: tabular-nums; }
-  table.expense-table td.uid { font-family: 'Courier New', monospace; font-size: 9.5px; color: #4a4a4a; }
-  table.expense-table td.dim { color: #999; }
+  table.expense-table td.uid { font-family: 'SF Mono', 'Courier New', monospace; font-size: 9.5px; color: #4a4a4a; }
+  table.expense-table td.dim { color: #b8b8b8; }
   table.expense-table tr:last-child td { border-bottom: none; }
+
+  .more-planes {
+    text-align: center;
+    padding: 14px;
+    color: #8b949e;
+    font-style: italic;
+    font-size: 11px;
+    margin: 6px 0 16px;
+    background: #fafbfc;
+    border: 1px dashed #d1d5da;
+    border-radius: 4px;
+  }
 
   /* ====== Pie ====== */
   .pdf-footer {
-    margin-top: 36px;
+    margin-top: 32px;
     padding-top: 14px;
     border-top: 1px solid #d1d5da;
     text-align: center;
     font-size: 10px;
     color: #6a737d;
     line-height: 1.7;
-    position: relative;
   }
   .pdf-footer strong { color: #2a2a2a; }
 
-  /* ====== Sidebar de anotaciones ====== */
+  /* ====== Sidebar ====== */
   aside { position: sticky; top: 16px; }
 
-  .annotations {
+  .sidebar-card {
     background: #fff;
     border: 1px solid #d1d5da;
-    border-radius: 4px;
+    border-radius: 6px;
     padding: 18px;
+    margin-bottom: 14px;
   }
-  .annotations h2 {
+  .sidebar-card h2 {
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: #586069;
-    margin-bottom: 4px;
+    color: #00b341;
+    margin-bottom: 10px;
     font-weight: 700;
   }
-  .annotations p.intro {
-    font-size: 12px;
-    color: #586069;
-    margin-bottom: 16px;
-    line-height: 1.5;
-  }
-  .anno {
-    display: grid;
-    grid-template-columns: 26px 1fr;
-    gap: 10px;
-    padding: 12px 0;
+  .jtbd-row {
+    padding: 11px 0;
     border-top: 1px solid #e1e4e8;
   }
-  .anno-num {
-    width: 24px; height: 24px;
-    border-radius: 50%;
-    background: #00b341;
-    color: #fff;
-    display: flex; align-items: center; justify-content: center;
-    font-weight: 700;
+  .jtbd-row:first-of-type { border-top: none; padding-top: 4px; }
+  .jtbd-row .audience {
     font-size: 11px;
-    flex-shrink: 0;
-  }
-  .anno-num.new { background: #d97706; }
-  .anno h3 {
-    font-size: 12px;
     font-weight: 700;
     color: #1a1d20;
     margin-bottom: 3px;
   }
-  .anno p {
+  .jtbd-row .audience .tag {
+    background: #f1f8f4;
+    color: #00802a;
+    padding: 1px 6px;
+    border-radius: 8px;
+    font-size: 9px;
+    font-weight: 700;
+    margin-right: 4px;
+    vertical-align: middle;
+  }
+  .jtbd-row .question {
+    font-size: 11px;
+    color: #586069;
+    font-style: italic;
+    margin-bottom: 4px;
+  }
+  .jtbd-row .answer {
     font-size: 11.5px;
-    color: #4a4a4a;
-    line-height: 1.5;
-  }
-  .anno .why {
-    margin-top: 4px;
-    padding: 6px 8px;
-    background: #f6f8fa;
-    border-left: 2px solid #00b341;
-    font-size: 11px;
     color: #1a1d20;
-  }
-
-  .legend {
-    background: #fffbeb;
-    border: 1px solid #fde68a;
-    border-radius: 4px;
-    padding: 12px 14px;
-    margin-top: 14px;
-    font-size: 11px;
-    color: #92400e;
     line-height: 1.5;
   }
-  .legend strong { color: #78350f; }
+  .jtbd-row .answer strong { color: #00b341; }
 
   @media (max-width: 1100px) {
     .layout { grid-template-columns: 1fr; }
     aside { position: static; }
     .resumen-grid { grid-template-columns: 1fr; }
-    .plan-header { grid-template-columns: 1fr; gap: 4px; }
+    .hero-total { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .hero-total .breakdown { text-align: left; }
   }
 </style>
 </head>
 <body>
 
 <div class="doc-header">
-  <strong>Reporte de Gastos · Mockup v3 — Pivote a Spending Plans como unidad</strong> · sesión 2026-05-08 · post-feedback Jonathan. <span style="color:#d97706; font-weight:600;">Naranja = elemento nuevo / cambio estructural.</span>
+  <strong>Reporte de Gastos · Mockup v4 — Spending Plans como unidad</strong> · 2026-05-08
 </div>
 
 <div class="layout">
@@ -411,130 +412,97 @@
   <main>
     <div class="pdf-page">
 
-      <!-- ====== HEADER VISUAL: logo + título ====== -->
+      <!-- ====== HEADER ====== -->
       <div class="brand-row">
         <span class="pin">1</span>
         <div class="uvicuo-logo">uvícuo</div>
         <div class="report-title">REPORTE DE GASTOS</div>
       </div>
 
-      <!-- ====== TABLA HEADER INFO ====== -->
       <table class="header-info">
         <tr>
           <td class="label">Estatus de gastos:</td><td class="value">Pendientes</td>
-          <td class="label">Fecha de emisión:</td><td class="value">08/05/2026</td>
-        </tr>
-        <tr>
-          <td class="label">Categorías:</td><td class="value">Combustible, Peajes y Estacionamiento</td>
           <td class="label">Periodo:</td><td class="value">11/02/2026 — 08/05/2026</td>
         </tr>
         <tr>
+          <td class="label">Categorías:</td><td class="value">Combustible, Peajes y Estacionamiento</td>
           <td class="label">Método de pago:</td><td class="value">Tarjeta</td>
-          <td class="label">Total de planes:</td><td class="value">25 planes · 76 gastos</td>
         </tr>
-        <tr class="new-row">
-          <td class="label">Planes creados por: <span class="new-badge">Nuevo</span></td>
-          <td class="value">Mis planes (Javier H.)</td>
-          <td class="label">Generado por: <span class="new-badge">Nuevo</span></td>
-          <td class="value">Javier Hernández</td>
-        </tr>
-        <tr class="total-row">
-          <td class="label">Total gastado:</td>
-          <td class="value" colspan="3">$38,221.80 MXN</td>
+        <tr>
+          <td class="label">Planes creados por:</td><td class="value">Mis planes (Javier H.)</td>
+          <td class="label">Generado por:</td><td class="value">Javier Hernández · 08/05/2026</td>
         </tr>
       </table>
 
-      <!-- ====== RESUMEN AGREGADO (multi-cortes) ====== -->
-      <h2 class="section">
-        <span class="pin new" style="left:-46px; top:6px;">2</span>
-        Resumen agregado <span class="new-badge">Nuevo · Multi-cortes</span>
-      </h2>
+      <!-- ====== HERO TOTAL ====== -->
+      <div class="hero-total">
+        <span class="pin" style="left:-46px; top:30px; background:#fff; color:#00b341;">2</span>
+        <div>
+          <div class="label">Total del periodo</div>
+          <div class="amount">$38,221.80 MXN</div>
+        </div>
+        <div class="breakdown">
+          <strong>25</strong> planes<br>
+          <strong>76</strong> gastos
+        </div>
+      </div>
 
+      <!-- ====== RESUMEN AGREGADO (2 cortes) ====== -->
       <div class="resumen-grid">
+        <span class="pin" style="left:-46px; top:8px;">3</span>
 
         <table class="resumen-table">
-          <caption class="new-caption">Por estatus de viaje (planes)</caption>
+          <caption>
+            Por estatus de viaje
+            <span class="audience-tag">→ Yolanda</span>
+          </caption>
           <thead><tr><th>Estatus</th><th class="num">Planes</th><th class="num">Total</th></tr></thead>
           <tbody>
             <tr><td>Activo</td><td class="num">10</td><td class="num">$15,221.80</td></tr>
             <tr><td>En cierre</td><td class="num">7</td><td class="num">$10,000.00</td></tr>
-            <tr><td>Finalizado</td><td class="num">8</td><td class="num">$13,000.00</td></tr>
+            <tr class="row-highlight"><td>Finalizado</td><td class="num">8</td><td class="num">$13,000.00</td></tr>
             <tr class="total-r"><td>TOTAL</td><td class="num">25</td><td class="num">$38,221.80</td></tr>
           </tbody>
         </table>
 
         <table class="resumen-table">
-          <caption class="new-caption">Por responsable del plan</caption>
-          <thead><tr><th>Responsable</th><th class="num">Planes</th><th class="num">Total</th></tr></thead>
-          <tbody>
-            <tr><td>Javier H. (admin)</td><td class="num">9</td><td class="num">$20,221.80</td></tr>
-            <tr><td>Coord. A (HER, MOC)</td><td class="num">11</td><td class="num">$13,000.00</td></tr>
-            <tr><td>Christopher (auditor)</td><td class="num">5</td><td class="num">$5,000.00</td></tr>
-            <tr class="total-r"><td>TOTAL</td><td class="num">25</td><td class="num">$38,221.80</td></tr>
-          </tbody>
-        </table>
-
-        <table class="resumen-table">
-          <caption>Por categoría (gastos cross-plan)</caption>
-          <thead><tr><th>Categoría</th><th class="num">Gastos</th><th class="num">Total</th></tr></thead>
-          <tbody>
-            <tr><td>Peajes y Estacionamiento</td><td class="num">44</td><td class="num">$1,932.94</td></tr>
-            <tr><td>Combustible</td><td class="num">32</td><td class="num">$36,288.86</td></tr>
-            <tr class="total-r"><td>TOTAL</td><td class="num">76</td><td class="num">$38,221.80</td></tr>
-          </tbody>
-        </table>
-
-        <table class="resumen-table">
-          <caption class="new-caption">Por estatus de facturación (gastos)</caption>
+          <caption>
+            Por estatus de facturación
+            <span class="audience-tag">→ Christopher</span>
+          </caption>
           <thead><tr><th>Estatus</th><th class="num">Gastos</th><th class="num">Total</th></tr></thead>
           <tbody>
-            <tr><td>Con factura</td><td class="num">12</td><td class="num">$8,432.50</td></tr>
+            <tr class="row-highlight"><td>Con factura SAT</td><td class="num">12</td><td class="num">$8,432.50</td></tr>
             <tr><td>Sin factura</td><td class="num">64</td><td class="num">$29,789.30</td></tr>
             <tr class="total-r"><td>TOTAL</td><td class="num">76</td><td class="num">$38,221.80</td></tr>
           </tbody>
         </table>
-
       </div>
 
-      <table class="resumen-table" style="margin-bottom:18px;">
-        <caption class="new-caption">Por estatus del gasto (validación)</caption>
-        <thead><tr><th>Estatus</th><th class="num">Gastos</th><th class="num">Total</th></tr></thead>
-        <tbody>
-          <tr><td>Pendiente</td><td class="num">76</td><td class="num">$38,221.80</td></tr>
-          <tr><td>Validado</td><td class="num">0</td><td class="num">$0.00</td></tr>
-          <tr><td>Invalidado</td><td class="num">0</td><td class="num">$0.00</td></tr>
-          <tr class="total-r"><td>TOTAL</td><td class="num">76</td><td class="num">$38,221.80</td></tr>
-        </tbody>
-      </table>
-
-      <!-- ====== DETALLE: BLOQUES POR PLAN ====== -->
+      <!-- ====== DETALLE POR PLAN ====== -->
       <h2 class="section">
-        <span class="pin new" style="left:-46px; top:6px;">3</span>
-        Detalle por plan <span class="new-badge">Nueva estructura · Plan como unidad</span>
+        <span class="pin" style="left:-46px; top:6px;">4</span>
+        Detalle por plan
       </h2>
 
-      <p style="margin-bottom:14px; padding:10px 14px; background:#fffbeb; border:1px solid #fde68a; border-radius:4px; font-size:11.5px; color:#78350f;">
-        <strong>Cambio estructural:</strong> el detalle se organiza en <strong>un bloque por plan</strong>, con sus expenses anidadas. Estatus, responsable y total viven en el header del plan — no se repiten por gasto. Cada audiencia trabaja con la unidad correcta (planes para Yolanda/Christopher; expenses dentro del plan para auditoría fiscal con UID).
-      </p>
-
-      <!-- ====== Plan 1 — En cierre ====== -->
+      <!-- Plan En cierre -->
       <div class="plan-block">
         <div class="plan-header">
-          <div>
-            <div class="plan-id">Plan #4892</div>
-            <div class="plan-meta">Operador: <strong>Raul G. Estrada Calderón</strong></div>
+          <div class="plan-header-top">
+            <div class="plan-id-operator">
+              <span class="plan-id">Plan #4892</span>
+              <span class="operator">Raul G. Estrada Calderón</span>
+            </div>
+            <div class="plan-total">$4,647.86</div>
           </div>
           <div class="plan-meta">
-            Ruta <strong>GDL → MTY</strong><br>
-            04/05/26 — 06/05/26
-          </div>
-          <div class="plan-status">
-            <span class="badge badge-cierre">En cierre</span><br>
-            <span style="margin-top:4px; display:inline-block;">Resp. <strong>Coord. A</strong></span>
-          </div>
-          <div class="plan-total">
-            <span class="label-total">Total del plan</span>
-            $4,647.86
+            <span>Ruta <strong>GDL → MTY</strong></span>
+            <span class="sep">·</span>
+            <span>04/05/26 — 06/05/26</span>
+            <span class="sep">·</span>
+            <span class="badge badge-cierre">En cierre</span>
+            <span class="sep">·</span>
+            <span>Resp. <strong>Coord. A</strong></span>
           </div>
         </div>
         <table class="expense-table">
@@ -565,24 +533,24 @@
         </table>
       </div>
 
-      <!-- ====== Plan 2 — Finalizado ====== -->
+      <!-- Plan Finalizado -->
       <div class="plan-block">
         <div class="plan-header">
-          <div>
-            <div class="plan-id">Plan #5103</div>
-            <div class="plan-meta">Operador: <strong>Santiago Merino</strong></div>
+          <div class="plan-header-top">
+            <div class="plan-id-operator">
+              <span class="plan-id">Plan #5103</span>
+              <span class="operator">Santiago Merino</span>
+            </div>
+            <div class="plan-total">$700.00</div>
           </div>
           <div class="plan-meta">
-            Ruta <strong>SLP → MTY</strong><br>
-            22/02/26 — 24/02/26
-          </div>
-          <div class="plan-status">
-            <span class="badge badge-finalizado">Finalizado</span><br>
-            <span style="margin-top:4px; display:inline-block;">Resp. <strong>Christopher</strong></span>
-          </div>
-          <div class="plan-total">
-            <span class="label-total">Total del plan</span>
-            $700.00
+            <span>Ruta <strong>SLP → MTY</strong></span>
+            <span class="sep">·</span>
+            <span>22/02/26 — 24/02/26</span>
+            <span class="sep">·</span>
+            <span class="badge badge-finalizado">Finalizado</span>
+            <span class="sep">·</span>
+            <span>Resp. <strong>Christopher</strong></span>
           </div>
         </div>
         <table class="expense-table">
@@ -603,24 +571,24 @@
         </table>
       </div>
 
-      <!-- ====== Plan 3 — Activo (Rocío) ====== -->
+      <!-- Plan Activo Rocío -->
       <div class="plan-block">
         <div class="plan-header">
-          <div>
-            <div class="plan-id">Plan #4710</div>
-            <div class="plan-meta">Operador: <strong>Rocío Cruz</strong></div>
+          <div class="plan-header-top">
+            <div class="plan-id-operator">
+              <span class="plan-id">Plan #4710</span>
+              <span class="operator">Rocío Cruz</span>
+            </div>
+            <div class="plan-total">$817.30</div>
           </div>
           <div class="plan-meta">
-            Ruta <strong>CDMX → GDL</strong><br>
-            07/05/26 — en curso
-          </div>
-          <div class="plan-status">
-            <span class="badge badge-activo">Activo</span><br>
-            <span style="margin-top:4px; display:inline-block;">Resp. <strong>Javier H.</strong></span>
-          </div>
-          <div class="plan-total">
-            <span class="label-total">Total del plan</span>
-            $817.30
+            <span>Ruta <strong>CDMX → GDL</strong></span>
+            <span class="sep">·</span>
+            <span>07/05/26 — en curso</span>
+            <span class="sep">·</span>
+            <span class="badge badge-activo">Activo</span>
+            <span class="sep">·</span>
+            <span>Resp. <strong>Javier H.</strong></span>
           </div>
         </div>
         <table class="expense-table">
@@ -641,24 +609,24 @@
         </table>
       </div>
 
-      <!-- ====== Plan 4 — Activo (Diego, peajes) ====== -->
+      <!-- Plan Activo Diego -->
       <div class="plan-block">
         <div class="plan-header">
-          <div>
-            <div class="plan-id">Plan #4583</div>
-            <div class="plan-meta">Operador: <strong>Diego Galico</strong></div>
+          <div class="plan-header-top">
+            <div class="plan-id-operator">
+              <span class="plan-id">Plan #4583</span>
+              <span class="operator">Diego Galico</span>
+            </div>
+            <div class="plan-total">$235.03</div>
           </div>
           <div class="plan-meta">
-            Ruta <strong>CDMX interna</strong><br>
-            02/05/26 — en curso
-          </div>
-          <div class="plan-status">
-            <span class="badge badge-activo">Activo</span><br>
-            <span style="margin-top:4px; display:inline-block;">Resp. <strong>Javier H.</strong></span>
-          </div>
-          <div class="plan-total">
-            <span class="label-total">Total del plan</span>
-            $235.03
+            <span>Ruta <strong>CDMX interna</strong></span>
+            <span class="sep">·</span>
+            <span>02/05/26 — en curso</span>
+            <span class="sep">·</span>
+            <span class="badge badge-activo">Activo</span>
+            <span class="sep">·</span>
+            <span>Resp. <strong>Javier H.</strong></span>
           </div>
         </div>
         <table class="expense-table">
@@ -694,241 +662,67 @@
         </table>
       </div>
 
-      <p style="text-align:center; padding:14px; color:#8b949e; font-style:italic; font-size:11px; margin:8px 0 16px;">
-        ... 21 planes adicionales (25 planes totales · 76 gastos)
-      </p>
+      <div class="more-planes">
+        21 planes adicionales · 25 planes totales
+      </div>
 
       <!-- ====== PIE ====== -->
       <div class="pdf-footer">
-        <span class="pin" style="left:-46px; top:18px;">4</span>
         Este documento es generado automáticamente por el sistema Uvicuo.<br>
-        Para cualquier aclaración o consulta, favor de contactar al equipo de finanzas.<br>
         <strong>Documento confidencial</strong> · Solo para uso interno y auditoría.
       </div>
 
     </div>
   </main>
 
-  <!-- ====== SIDEBAR ANOTACIONES ====== -->
+  <!-- ====== SIDEBAR — JTBD por audiencia ====== -->
   <aside>
-    <div class="annotations">
-      <h2>Cambios propuestos · v3 (post-feedback Jonathan)</h2>
-      <p class="intro">Pivote estructural: el reporte cambia su unidad de análisis de <strong>expense</strong> a <strong>spending plan</strong>. Cada plan es un bloque con sus gastos anidadas. Resuelve los JTBDs de las 6 audiencias de manera natural.</p>
 
-      <div class="anno">
-        <div class="anno-num">1</div>
-        <div class="anno-content">
-          <h3>Header — "Planes creados por" + "Generado por"</h3>
-          <p>Las 2 filas nuevas se conservan. El total ahora dice "Total de planes: 25 planes · 76 gastos" (la unidad cambia).</p>
-          <div class="why"><strong>Por qué:</strong> sigue resolviendo "¿qué filtro se aplicó al generar?" para auditoría posterior. Vocabulario alineado con DDD (feedback Jonathan).</div>
-        </div>
+    <div class="sidebar-card">
+      <h2>Cómo cumple cada JTBD</h2>
+
+      <div class="jtbd-row">
+        <div class="audience"><span class="tag">A3</span>Yolanda · Jefa de área</div>
+        <div class="question">"¿Cuánto puedo reembolsar de caja?"</div>
+        <div class="answer">Resumen <strong>"Por estatus de viaje"</strong> con la fila <strong>Finalizado</strong> resaltada. Su número está en 5 segundos: <strong>$13,000.00 (8 planes)</strong>. Imprime esos bloques específicos para anexar a la póliza.</div>
       </div>
 
-      <div class="anno">
-        <div class="anno-num new">2</div>
-        <div class="anno-content">
-          <h3>Resumen agregado — multi-cortes</h3>
-          <p>5 tablas pivote agregadas: por estatus de viaje, por responsable, por categoría, por estatus de facturación, por estatus del gasto.</p>
-          <div class="why"><strong>Por qué:</strong> cada audiencia tiene una pregunta distinta. Al inicio se contestan TODAS sin scrollear. Yolanda → estatus viaje. Christopher → facturación. Iker → responsable. Validador → estatus de gasto.</div>
-        </div>
+      <div class="jtbd-row">
+        <div class="audience"><span class="tag">A4</span>Christopher · Auditor</div>
+        <div class="question">"¿Cuánto está pendiente de comprobación SAT?"</div>
+        <div class="answer">Resumen <strong>"Por estatus de facturación"</strong> con <strong>Con factura</strong> resaltada. Para auditar, abre cada plan y cruza UIDs (visibles en cada expense) con SAT.</div>
       </div>
 
-      <div class="anno">
-        <div class="anno-num new">3</div>
-        <div class="anno-content">
-          <h3>Detalle — un bloque por plan, expenses anidadas</h3>
-          <p>Pivote estructural. Cada plan es un bloque con: header (estatus, responsable, ruta, fechas, total) + tabla con sus expenses anidadas (con UID).</p>
-          <div class="why"><strong>Por qué:</strong> la audiencia trabaja por plan, no por expense suelto. Yolanda procesa los planes Finalizado contiguos sin page-break artificial. Christopher cruza UIDs dentro del plan. Estatus de viaje y Responsable suben al header del plan — dejan de ser columnas redundantes.</div>
-        </div>
+      <div class="jtbd-row">
+        <div class="audience"><span class="tag">A2</span>Javier · Validador</div>
+        <div class="question">"¿Cuáles son mis pendientes sin gastos ajenos?"</div>
+        <div class="answer">Filtro de <strong>Planes creados por</strong> en el modal trae solo sus planes. El reporte le entrega bloques limpios donde él es responsable.</div>
       </div>
 
-      <div class="anno">
-        <div class="anno-num">4</div>
-        <div class="anno-content">
-          <h3>Pie — sin cambios</h3>
-          <p>Igual al actual.</p>
-        </div>
+      <div class="jtbd-row">
+        <div class="audience"><span class="tag">A5</span>Auditoría externa</div>
+        <div class="question">"¿La deducibilidad declarada se sostiene?"</div>
+        <div class="answer">Mismo reporte que A4, recibido vía Christopher. Cada plan con UIDs cruzables.</div>
       </div>
+
+      <div class="jtbd-row">
+        <div class="audience"><span class="tag">A6</span>Contabilidad</div>
+        <div class="question">"¿Cómo importo a pólizas?"</div>
+        <div class="answer">Plan ≈ póliza natural. Bloque por plan = unidad de importación lógica. (Idealmente CSV en V2.)</div>
+      </div>
+
     </div>
 
-    <div class="legend">
-      <strong>Qué se descarta vs versión anterior:</strong>
-      <br>• Page-break entre comprobables/no-comprobables (Jonathan: "endeble")
-      <br>• "Planeado" como estatus de viaje (no existe en plataforma)
-      <br>• Columna "Estatus viaje" en cada expense (sube al header del plan)
-      <br>• Columna "Responsable" en cada expense (sube al header del plan)
-      <br><br>
-      <strong>Qué se conserva:</strong>
-      <br>• T-01 (filtro Responsable en modal) — válido tal cual
-      <br>• T-02 (header con Planes creados por + Generado por) — válido tal cual
-      <br>• UID en cada expense (Christopher cruza con SAT)
-      <br>• BE parametrizado por sección/columna
+    <div class="sidebar-card" style="background:#fffbeb; border-color:#fde68a;">
+      <h2 style="color:#92400e;">Por qué solo 2 resúmenes</h2>
+      <p style="font-size:11.5px; color:#78350f; line-height:1.6;">
+        Aplicando JTBD strict: solo <strong>"Por estatus de viaje"</strong> y <strong>"Por estatus de facturación"</strong> resuelven preguntas de audiencias específicas. Resúmenes por categoría / responsable / estatus de gasto se descartaron — eran ruido visual sin un JTBD que los pidiera.
+      </p>
     </div>
+
   </aside>
 
 </div>
-
-<!-- ============================================================ -->
-<!-- ============== BRIEF actualizado v3 ======================== -->
-<!-- ============================================================ -->
-
-<section style="max-width:1280px; margin:40px auto 24px; padding:40px 48px; background:#fff; border-radius:4px; border:1px solid #d1d5da; color:#2a2a2a;">
-
-  <div style="border-bottom:2px solid #00b341; padding-bottom:18px; margin-bottom:28px;">
-    <div style="color:#00b341; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:2px; margin-bottom:6px;">Brief · v3 post-feedback Jonathan</div>
-    <h1 style="font-size:26px; color:#1a1d20; font-weight:700; margin-bottom:10px;">Por qué pivoteamos a Spending Plans como unidad</h1>
-    <p style="font-size:14px; color:#4a4a4a; line-height:1.6;">El feedback de Jonathan (tech lead) cuestionó el approach de "1 reporte con secciones para todos". Profundizamos sobre eso y llegamos a una conclusión más estructural: la unidad de análisis estaba mal. Las audiencias trabajan con planes, no con expenses sueltas.</p>
-  </div>
-
-  <div style="margin-bottom:36px;">
-    <h2 style="font-size:16px; font-weight:700; color:#1a1d20; margin-bottom:8px; padding-bottom:6px; border-bottom:1px solid #e1e4e8;">Lo que cambia con el pivote</h2>
-    <table style="width:100%; border-collapse:collapse; font-size:12px; margin-top:10px;">
-      <thead>
-        <tr>
-          <th style="padding:9px 12px; border:1px solid #e1e4e8; background:#f6f8fa; text-align:left; font-weight:600; font-size:11px; text-transform:uppercase;">Elemento</th>
-          <th style="padding:9px 12px; border:1px solid #e1e4e8; background:#f6f8fa; text-align:left; font-weight:600; font-size:11px; text-transform:uppercase;">Versión anterior (v2)</th>
-          <th style="padding:9px 12px; border:1px solid #e1e4e8; background:#f6f8fa; text-align:left; font-weight:600; font-size:11px; text-transform:uppercase;">Versión nueva (v3)</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td style="padding:9px 12px; border:1px solid #e1e4e8; vertical-align:top;"><strong>Unidad de análisis</strong></td>
-          <td style="padding:9px 12px; border:1px solid #e1e4e8; vertical-align:top;">Expense suelto. 76 filas en una sola tabla.</td>
-          <td style="padding:9px 12px; border:1px solid #e1e4e8; vertical-align:top; background:#fffbeb;">Plan. ~25 bloques, cada uno con sus expenses anidadas.</td>
-        </tr>
-        <tr>
-          <td style="padding:9px 12px; border:1px solid #e1e4e8; vertical-align:top;"><strong>Sección Resumen</strong></td>
-          <td style="padding:9px 12px; border:1px solid #e1e4e8; vertical-align:top;">4 tablas pivote sobre expenses (categoría, facturación, viaje, responsable).</td>
-          <td style="padding:9px 12px; border:1px solid #e1e4e8; vertical-align:top; background:#fffbeb;">5 tablas pivote multi-cortes: estatus de viaje (planes), responsable (planes), categoría (gastos cross-plan), facturación (gastos), estatus del gasto.</td>
-        </tr>
-        <tr>
-          <td style="padding:9px 12px; border:1px solid #e1e4e8; vertical-align:top;"><strong>Detalle</strong></td>
-          <td style="padding:9px 12px; border:1px solid #e1e4e8; vertical-align:top;">Tabla larga de 11 columnas con todas las expenses + agrupado por estatus + page-break.</td>
-          <td style="padding:9px 12px; border:1px solid #e1e4e8; vertical-align:top; background:#fffbeb;">Bloques por plan. Cada bloque con header (plan, estatus, responsable, total) y tabla anidada de sus expenses (7 columnas).</td>
-        </tr>
-        <tr>
-          <td style="padding:9px 12px; border:1px solid #e1e4e8; vertical-align:top;"><strong>Page-break</strong></td>
-          <td style="padding:9px 12px; border:1px solid #e1e4e8; vertical-align:top;">CSS page-break entre comprobables/no-comprobables.</td>
-          <td style="padding:9px 12px; border:1px solid #e1e4e8; vertical-align:top; background:#fffbeb;">No aplica. Cada plan ya es su propio bloque visual; Yolanda imprime los bloques que necesita.</td>
-        </tr>
-        <tr>
-          <td style="padding:9px 12px; border:1px solid #e1e4e8; vertical-align:top;"><strong>Estatus viaje + Responsable</strong></td>
-          <td style="padding:9px 12px; border:1px solid #e1e4e8; vertical-align:top;">Columnas en cada expense (redundante).</td>
-          <td style="padding:9px 12px; border:1px solid #e1e4e8; vertical-align:top; background:#fffbeb;">Suben al header del plan. Aparecen una vez por plan, no por gasto.</td>
-        </tr>
-        <tr>
-          <td style="padding:9px 12px; border:1px solid #e1e4e8; vertical-align:top;"><strong>UID Factura SAT</strong></td>
-          <td style="padding:9px 12px; border:1px solid #e1e4e8; vertical-align:top;">Columna en cada expense.</td>
-          <td style="padding:9px 12px; border:1px solid #e1e4e8; vertical-align:top;">Igual — sigue siendo columna en cada expense (porque la factura es por gasto, no por plan).</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div style="margin-bottom:36px;">
-    <h2 style="font-size:16px; font-weight:700; color:#1a1d20; margin-bottom:8px; padding-bottom:6px; border-bottom:1px solid #e1e4e8;">Cómo cumple cada JTBD</h2>
-    <table style="width:100%; border-collapse:collapse; font-size:12px; margin-top:10px;">
-      <thead>
-        <tr>
-          <th style="padding:9px 12px; border:1px solid #e1e4e8; background:#f6f8fa; text-align:left; font-weight:600; font-size:11px;">Audiencia</th>
-          <th style="padding:9px 12px; border:1px solid #e1e4e8; background:#f6f8fa; text-align:left; font-weight:600; font-size:11px;">JTBD</th>
-          <th style="padding:9px 12px; border:1px solid #e1e4e8; background:#f6f8fa; text-align:left; font-weight:600; font-size:11px;">Resuelto en v3</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td style="padding:9px 12px; border:1px solid #e1e4e8; vertical-align:top;"><strong>A1 — Coordinador (Sarai)</strong></td>
-          <td style="padding:9px 12px; border:1px solid #e1e4e8; vertical-align:top;">Conciliar pendientes contra físico/Excel</td>
-          <td style="padding:9px 12px; border:1px solid #e1e4e8; vertical-align:top;"><strong>Fuera de scope del reporte:</strong> el JTBD "conciliar contra físico" desaparece con Uvicuo (eliminamos Excel y papel). Sarai trabaja en la vista, no en el reporte.</td>
-        </tr>
-        <tr>
-          <td style="padding:9px 12px; border:1px solid #e1e4e8; vertical-align:top;"><strong>A2 — Validador (Javier)</strong></td>
-          <td style="padding:9px 12px; border:1px solid #e1e4e8; vertical-align:top;">Validar mis pendientes sin gastos ajenos</td>
-          <td style="padding:9px 12px; border:1px solid #e1e4e8; vertical-align:top;">✅ Filtro Responsable (T-01) + bloques por plan donde es responsable. Su universo de validación queda explícito.</td>
-        </tr>
-        <tr>
-          <td style="padding:9px 12px; border:1px solid #e1e4e8; vertical-align:top;"><strong>A3 — Jefa (Yolanda)</strong></td>
-          <td style="padding:9px 12px; border:1px solid #e1e4e8; vertical-align:top;">Saber cuánto reembolsar de caja</td>
-          <td style="padding:9px 12px; border:1px solid #e1e4e8; vertical-align:top;">✅✅ Tabla "por estatus de viaje" → ve Finalizado al instante. Detalle de planes Finalizado en bloques propios → imprime esos para anexar a póliza.</td>
-        </tr>
-        <tr>
-          <td style="padding:9px 12px; border:1px solid #e1e4e8; vertical-align:top;"><strong>A4 — Auditor (Christopher)</strong></td>
-          <td style="padding:9px 12px; border:1px solid #e1e4e8; vertical-align:top;">Demostrar trazabilidad SAT</td>
-          <td style="padding:9px 12px; border:1px solid #e1e4e8; vertical-align:top;">✅ Cada plan trae sus expenses con UID dentro. Audita plan por plan, cruzando UIDs con SAT.</td>
-        </tr>
-        <tr>
-          <td style="padding:9px 12px; border:1px solid #e1e4e8; vertical-align:top;"><strong>A5 — Auditoría externa</strong></td>
-          <td style="padding:9px 12px; border:1px solid #e1e4e8; vertical-align:top;">Verificar deducibilidad declarada</td>
-          <td style="padding:9px 12px; border:1px solid #e1e4e8; vertical-align:top;">✅ idem A4. Recibe el reporte estructurado por planes.</td>
-        </tr>
-        <tr>
-          <td style="padding:9px 12px; border:1px solid #e1e4e8; vertical-align:top;"><strong>A6 — Contabilidad</strong></td>
-          <td style="padding:9px 12px; border:1px solid #e1e4e8; vertical-align:top;">Importar al ERP para pólizas</td>
-          <td style="padding:9px 12px; border:1px solid #e1e4e8; vertical-align:top;">✅ Plan ≈ póliza contable natural. Bloque por plan = unidad de importación lógica.</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div style="margin-bottom:36px;">
-    <h2 style="font-size:16px; font-weight:700; color:#1a1d20; margin-bottom:8px; padding-bottom:6px; border-bottom:1px solid #e1e4e8;">Feedback Jonathan capturado en v3</h2>
-    <table style="width:100%; border-collapse:collapse; font-size:12px; margin-top:10px;">
-      <thead>
-        <tr>
-          <th style="padding:9px 12px; border:1px solid #e1e4e8; background:#f6f8fa; text-align:left; font-weight:600; font-size:11px;">Feedback</th>
-          <th style="padding:9px 12px; border:1px solid #e1e4e8; background:#f6f8fa; text-align:left; font-weight:600; font-size:11px;">Resolución v3</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td style="padding:9px 12px; border:1px solid #e1e4e8;">"Mismo reporte para 6 personas que hacen 6 cosas distintas"</td>
-          <td style="padding:9px 12px; border:1px solid #e1e4e8;">Pivote a unidad correcta (plan). La estructura natural agrupa lo que cada audiencia necesita.</td>
-        </tr>
-        <tr>
-          <td style="padding:9px 12px; border:1px solid #e1e4e8;">"Page break en PDF = solución endeble"</td>
-          <td style="padding:9px 12px; border:1px solid #e1e4e8;">Removido. Cada plan es su bloque visual; Yolanda imprime selectivamente sin necesidad de page-break.</td>
-        </tr>
-        <tr>
-          <td style="padding:9px 12px; border:1px solid #e1e4e8;">"Spending plans en vez de expenses"</td>
-          <td style="padding:9px 12px; border:1px solid #e1e4e8;">✅ Aplicado. Es el cambio estructural central de v3.</td>
-        </tr>
-        <tr>
-          <td style="padding:9px 12px; border:1px solid #e1e4e8;">"'Responsable filtrado' confunde — usa lenguaje del cliente (DDD)"</td>
-          <td style="padding:9px 12px; border:1px solid #e1e4e8;">Renombrado a "Planes creados por". Pendiente: revisar todo el copy contra el lenguaje observado en transcripts del discovery.</td>
-        </tr>
-        <tr>
-          <td style="padding:9px 12px; border:1px solid #e1e4e8;">"Planeado no existe en plataforma"</td>
-          <td style="padding:9px 12px; border:1px solid #e1e4e8;">✅ Removido. Estatus de viaje normalizado en 3 valores: Activo / En cierre / Finalizado.</td>
-        </tr>
-        <tr>
-          <td style="padding:9px 12px; border:1px solid #e1e4e8;">"Reporting como iniciativa real, no parche para PE"</td>
-          <td style="padding:9px 12px; border:1px solid #e1e4e8;">v3 sirve a cualquier cliente con planes (no solo PE). Endpoint parametrizado por sección. UI V1 manda todo encendido; V2 puede agregar UI de personalización sin re-trabajo de BE.</td>
-        </tr>
-        <tr>
-          <td style="padding:9px 12px; border:1px solid #e1e4e8;">"1 ticket de producto consolidado, no 4 tech sueltos"</td>
-          <td style="padding:9px 12px; border:1px solid #e1e4e8;">UVI-3036 creado. T-01..T-04 vinculados como `relatedTo`. Pendiente actualizar UVI-3023 y UVI-3024 con la estructura nueva del pivote.</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div style="margin-bottom:36px;">
-    <h2 style="font-size:16px; font-weight:700; color:#1a1d20; margin-bottom:8px; padding-bottom:6px; border-bottom:1px solid #e1e4e8;">Pendientes para arrancar</h2>
-    <ul style="margin-left:20px; margin-top:8px; line-height:1.7;">
-      <li><strong>Re-validar con Christopher</strong>: él aprobó la versión con page-break. Pivote cambia el approach. Mensaje sale en breve a confirmar.</li>
-      <li><strong>Aclarar con Jonathan en BE</strong>: confirmar que existe la entidad "spending plan" con la relación a expenses, estatus normalizados, y los campos necesarios (responsable, ruta, operador, periodo).</li>
-      <li><strong>Eleanor diseños</strong>: T-01 (modal) y T-02 (header) siguen vigentes. T-03 y T-04 cambian sustancialmente — Eleanor puede empezar por la estructura del bloque por plan.</li>
-      <li><strong>Actualizar UVI-3023 y UVI-3024</strong> en Linear con la nueva estructura. UVI-3036 (consolidado) queda como spec autoritativa de v3.</li>
-      <li><strong>Vocabulario</strong>: revisar copy del producto contra transcripts del discovery (DDD del cliente).</li>
-    </ul>
-  </div>
-
-  <div style="margin-top:30px; padding-top:18px; border-top:1px solid #e1e4e8; text-align:center; font-size:11px; color:#6a737d; line-height:1.6;">
-    <strong>Documento de trabajo · iniciativa Paquetexpress Cash Wrap-up</strong><br>
-    v3 post-feedback Jonathan · 2026-05-08
-  </div>
-
-</section>
 
 </body>
 </html>
