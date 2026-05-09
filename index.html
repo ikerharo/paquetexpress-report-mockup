@@ -447,7 +447,7 @@
         </div>
       </div>
 
-      <!-- ====== RESUMEN AGREGADO (2 cortes) ====== -->
+      <!-- ====== RESUMEN AGREGADO (4 cortes) ====== -->
       <div class="resumen-grid">
         <span class="pin" style="left:-46px; top:8px;">3</span>
 
@@ -474,6 +474,33 @@
           <tbody>
             <tr class="row-highlight"><td>Con factura SAT</td><td class="num">12</td><td class="num">$8,432.50</td></tr>
             <tr><td>Sin factura</td><td class="num">64</td><td class="num">$29,789.30</td></tr>
+            <tr class="total-r"><td>TOTAL</td><td class="num">76</td><td class="num">$38,221.80</td></tr>
+          </tbody>
+        </table>
+
+        <table class="resumen-table">
+          <caption>
+            Por categoría
+            <span class="audience-tag">→ Javier · concilia</span>
+          </caption>
+          <thead><tr><th>Categoría</th><th class="num">Gastos</th><th class="num">Total</th></tr></thead>
+          <tbody>
+            <tr><td>Combustible</td><td class="num">32</td><td class="num">$36,288.86</td></tr>
+            <tr><td>Peajes y Estacionamiento</td><td class="num">44</td><td class="num">$1,932.94</td></tr>
+            <tr class="total-r"><td>TOTAL</td><td class="num">76</td><td class="num">$38,221.80</td></tr>
+          </tbody>
+        </table>
+
+        <table class="resumen-table">
+          <caption>
+            Por estatus del gasto
+            <span class="audience-tag">→ Javier · concilia</span>
+          </caption>
+          <thead><tr><th>Estatus</th><th class="num">Gastos</th><th class="num">Total</th></tr></thead>
+          <tbody>
+            <tr class="row-highlight"><td>Pendientes de validar</td><td class="num">76</td><td class="num">$38,221.80</td></tr>
+            <tr><td>Validados</td><td class="num">0</td><td class="num">$0.00</td></tr>
+            <tr><td>Invalidados</td><td class="num">0</td><td class="num">$0.00</td></tr>
             <tr class="total-r"><td>TOTAL</td><td class="num">76</td><td class="num">$38,221.80</td></tr>
           </tbody>
         </table>
@@ -695,8 +722,8 @@
 
       <div class="jtbd-row">
         <div class="audience"><span class="tag">A2</span>Javier · Validador</div>
-        <div class="question">"¿Cuáles son mis pendientes sin gastos ajenos?"</div>
-        <div class="answer">Filtro de <strong>Planes creados por</strong> en el modal trae solo sus planes. El reporte le entrega bloques limpios donde él es responsable.</div>
+        <div class="question">"¿Cuáles son mis pendientes y cómo concilio cada categoría?"</div>
+        <div class="answer">Filtro <strong>Planes creados por</strong> trae solo sus planes. Para conciliar usa <strong>"Por categoría"</strong> (audita combustible vs peajes) + <strong>"Por estatus del gasto"</strong> (cuántos pendientes vs validados vs invalidados). Cada categoría se audita contra su agregado.</div>
       </div>
 
       <div class="jtbd-row">
@@ -714,9 +741,15 @@
     </div>
 
     <div class="sidebar-card" style="background:#fffbeb; border-color:#fde68a;">
-      <h2 style="color:#92400e;">Por qué solo 2 resúmenes</h2>
+      <h2 style="color:#92400e;">Resúmenes y JTBD</h2>
       <p style="font-size:11.5px; color:#78350f; line-height:1.6;">
-        Aplicando JTBD strict: solo <strong>"Por estatus de viaje"</strong> y <strong>"Por estatus de facturación"</strong> resuelven preguntas de audiencias específicas. Resúmenes por categoría / responsable / estatus de gasto se descartaron — eran ruido visual sin un JTBD que los pidiera.
+        Cada uno de los 4 resúmenes resuelve un JTBD específico:
+        <br>• <strong>Estatus de viaje</strong> → Yolanda reembolsa
+        <br>• <strong>Estatus de facturación</strong> → Christopher audita SAT
+        <br>• <strong>Categoría</strong> → Javier concilia/audita por tipo
+        <br>• <strong>Estatus del gasto</strong> → Javier concilia su trabajo de validación
+        <br><br>
+        <em>"Por responsable"</em> se descartó: cada bloque de plan ya muestra su responsable individualmente — agregarlo como tabla pivote era redundante.
       </p>
     </div>
 
